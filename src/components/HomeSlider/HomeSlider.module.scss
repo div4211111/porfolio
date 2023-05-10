@@ -1,0 +1,4 @@
+.carousel_container .slick-slide:not(.slick-current) {
+  opacity: 0.5;
+  transform: scale(0.9);
+}

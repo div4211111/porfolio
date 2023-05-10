@@ -1,0 +1,44 @@
+@import "../../styles/mixins";
+
+.container {
+  height: 100%;
+  display: flex;
+
+  @include adaptive-propertyPx(padding-top, 15, 5);
+  @include adaptive-propertyPx(padding-bottom, 15, 5);
+  @include adaptive-propertyPx(padding-right, 30, 10);
+  @include adaptive-propertyPx(padding-left, 30, 10);
+}
+
+.numbers {
+  display: flex;
+  flex-direction: column;
+  color: var(--secondary-one);
+}
+
+.text {
+  color: var(--secondary-one);
+  white-space: pre-line;
+  line-height: 27px;
+  font-size: 18px;
+  align-self: baseline;
+  padding-top: 27px;
+}
+
+.number_row {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.number_item {
+  line-height: 27px;
+  font-size: 18px;
+  width: 27px;
+  display: flex;
+  justify-content: center;
+}
+
+.number_item:last-child {
+  justify-content: start;
+}

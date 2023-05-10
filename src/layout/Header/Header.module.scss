@@ -1,0 +1,70 @@
+@import "../../styles/mixins";
+
+.header {
+  height: 60px;
+  border-bottom: 1px solid var(--border-primary);
+  display: grid;
+  grid-template-columns: minmax(auto, calcwidth(310, 110)) auto;
+  grid-template-areas: "name links_container";
+
+  @media (width <= 767.98px) {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "name icon";
+    align-items: center;
+  }
+}
+
+.name {
+  grid-area: name;
+  align-self: center;
+  padding-left: 22px;
+  color: var(--secondary-one);
+}
+
+.icon {
+  grid-area: icon;
+  display: none;
+  color: var(--secondary-one);
+
+  &:hover {
+    color: var(--white);
+  }
+
+  @media (width <= 767.98px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 22px;
+    width: 16px;
+  }
+}
+
+.icon_svg {
+  height: 100%;
+  width: 100%;
+}
+
+.links_container {
+  grid-area: links_container;
+  display: grid;
+  grid-template-columns: auto minmax(min-content, max-content);
+  grid-template-areas: "links contact";
+
+  @media (width <= 767.98px) {
+    display: none;
+  }
+}
+
+.links {
+  grid-area: links;
+  display: flex;
+  align-items: center;
+}
+
+.border_right {
+  border-right: 1px solid var(--border-primary);
+}
+
+.contact {
+  grid-area: contact;
+}

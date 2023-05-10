@@ -1,0 +1,159 @@
+@import "mixins";
+
+.wrapper {
+  height: 100%;
+  display: grid;
+  align-items: center;
+  overflow-y: scroll;
+
+  @media (width <= 767.98px) {
+    overflow: initial;
+  }
+}
+
+.wrapper_carousel {
+  overflow-y: hidden;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  height: 100%;
+  align-items: center;
+
+  @include adaptive-propertyPx(gap, 50, 10);
+
+  border-right: 1px solid var(--border-primary);
+
+  @media (width <= 767.98px) {
+    border-right: none;
+  }
+}
+
+.information {
+  z-index: 2;
+}
+
+.game {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 1;
+
+  @media (width <= 767.98px) {
+    display: none;
+  }
+}
+
+.carousel {
+  z-index: 2;
+
+  @media (width <= 767.98px) {
+    display: none;
+  }
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  width: 30%;
+  height: 30%;
+  background-color: var(--secondary-two);
+  opacity: 0.4;
+  filter: blur(87px);
+}
+
+.container::after {
+  content: "";
+  position: absolute;
+  bottom: 20%;
+  right: 10%;
+  width: 30%;
+  height: 30%;
+  background-color: var(--secondary-three);
+  opacity: 0.4;
+  filter: blur(87px);
+  z-index: 0;
+}
+
+.uptitle {
+  font-size: 18px;
+  line-height: 24px;
+  color: #e5e9f0;
+}
+
+.title {
+  font-weight: 300;
+  font-size: 62px;
+  line-height: 81px;
+  color: #e5e9f0;
+}
+
+.subtitle {
+  @include adaptive-propertyPx(font-size, 32, 20);
+  @include adaptive-propertyPx(line-height, 42, 26);
+
+  color: var(--secondary-three);
+  margin-bottom: 80px;
+
+  @include adaptive-propertyPx(margin-bottom, 80, 40);
+}
+
+.description {
+  line-height: 21px;
+  color: var(--secondary-one);
+  margin-bottom: 10px;
+}
+
+.description_mobile {
+  display: none;
+
+  @media (width <= 767.98px) {
+    display: block;
+  }
+}
+
+.description_desktop {
+  @media (width <= 767.98px) {
+    display: none;
+  }
+}
+
+.link {
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 21px;
+
+  @include adaptive-propertyPx(font-size, 16, 14);
+}
+
+.const {
+  color: var(--secondary-thee);
+}
+
+.varname {
+  color: var(--accent-two);
+}
+
+.textlink {
+  color: var(--accent-three);
+}
+
+.textlink_mobile {
+  display: none;
+
+  @media (width <= 767.98px) {
+    display: block;
+  }
+}
+
+.textlink_desktop {
+  @media (width <= 767.98px) {
+    display: none;
+  }
+}

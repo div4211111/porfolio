@@ -1,0 +1,40 @@
+
+.title {
+  display: flex;
+  align-items: center;
+    width: 100%;
+  padding: 10px 0;
+  padding-left: 15px;
+  cursor: pointer;
+  border-top: 1px solid var(--border-primary);
+  border-bottom: 1px solid var(--border-primary);
+
+  @media (width <= 767.98px) {
+    border: none;
+    background: var(--border-primary);
+  }
+}
+
+.title_active {
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.title_arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title_arrow_active svg {
+  transform: rotate(90deg);
+}
+
+
+.content {
+  padding: 15px;
+  display: none;
+}
+
+.content_active {
+  display: block;
+}

@@ -1,0 +1,36 @@
+.personal_info:last-child {
+  border-top: 1px solid var(--border-primary);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding-bottom: 5px;
+  color: var(--secondary-one);
+  font-size: 14px;
+}
+
+.item:hover {
+  color: var(--white);
+}
+
+.item:last-child {
+  padding-bottom: 0;
+}
+
+.item_icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}
+
+.item_name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.contacts {
+}

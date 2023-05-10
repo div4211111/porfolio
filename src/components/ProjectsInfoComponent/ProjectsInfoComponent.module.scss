@@ -1,0 +1,100 @@
+@import "../../styles/mixins";
+
+.container {
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.container_checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  font-size: 1rem;
+}
+
+/* Hide the browser's default checkbox */
+.container_checkbox input {
+  position: absolute;
+  visibility: hidden;
+  order: 1;
+  width: 0;
+  height: 0;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.checkmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+
+  @include adaptive-propertyPx(margin-right, 24, 5);
+
+  transition: border 0.3s ease;
+  flex: 0 0 auto;
+  border: 1px solid var(--border-primary);
+  border-radius: 2px;
+}
+
+.checkmark:focus {
+  outline: 2px solid var(--secondary-three);
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+  transition: opacity, fill 0.3s ease;
+  opacity: 0;
+}
+
+.type_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include adaptive-propertyPx(margin-right, 10, 5);
+
+  color: var(--secondary-one);
+  opacity: 0.4;
+  flex: 0 0 auto;
+}
+
+.text {
+  color: var(--secondary-one);
+}
+
+.container_checkbox input:checked ~ .checkmark .icon {
+  opacity: 1;
+}
+
+.container_checkbox input:checked ~ .type_icon {
+  opacity: 1;
+}
+
+.container_checkbox input:checked ~ .text {
+  color: var(--white);
+}
+
+.container_checkbox input:checked ~ .checkmark {
+  background: var(--border-primary);
+}
+
+.container_checkbox:hover input ~ .checkmark {
+  border: 1px solid var(--secondary-three);
+}
+
+.container_checkbox:hover input ~ .type_icon {
+  opacity: 1;
+}
+
+.container_checkbox:hover input ~ .text {
+  color: var(--white);
+}

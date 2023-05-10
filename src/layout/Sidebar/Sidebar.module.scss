@@ -1,0 +1,113 @@
+@import "../../styles/mixins";
+
+.sidebar {
+  display: flex;
+  border-right: 1px solid var(--border-primary);
+  overflow: hidden;
+
+  @media (width <= 991.98px) {
+    flex-direction: column;
+    overflow-y: scroll;
+  }
+
+  @media (width <= 767.98px) {
+    overflow: initial;
+  }
+}
+
+.personal_info_icons {
+  @include adaptive-propertyPx(padding, 15, 5, true);
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  border-right: 1px solid var(--border-primary);
+
+  @media (width <= 991.98px) {
+    padding: 13px;
+    flex-direction: row;
+    justify-content: center;
+    border-bottom: 1px solid var(--border-primary);
+  }
+
+  @media (width <= 767.98px) {
+    display: none;
+  }
+}
+
+.content_container {
+  width: 100%;
+  overflow-y: scroll;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+
+  @media (width <= 991.98px) {
+    overflow: initial;
+    border-right: 1px solid var(--border-primary);
+  }
+
+  @media (width <= 767.98px) {
+    border-right: none;
+  }
+}
+
+.content_subcontainer {
+  flex: 1 1 auto;
+  border-right: 1px solid var(--border-primary);
+
+  @media (width <= 991.98px) {
+    border-right: none;
+  }
+}
+
+.content {
+  @media (width <= 767.98px) {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+}
+
+.content_mobile {
+  display: none;
+
+  @media (width <= 767.98px) {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+}
+
+.content_desktop {
+  @media (width <= 767.98px) {
+    display: none;
+  }
+}
+
+.content_mobile_title {
+  padding: 30px 20px;
+  display: none;
+
+  @media (width <= 767.98px) {
+    display: block;
+  }
+}
+
+.icon_link {
+  color: var(--secondary-one);
+
+  @media (width <= 991.98px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.icon_link:hover {
+  color: var(--white);
+}
+
+.icon_link_active {
+  color: var(--white);
+}
