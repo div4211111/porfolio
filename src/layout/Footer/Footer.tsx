@@ -8,12 +8,14 @@ export const Footer = ({ className, ...props }: FooterProps): JSX.Element => {
     <footer className={cn(styles.footer, className)} {...props}>
       <div className={cn(styles.social)}>
         <div className={cn(styles.social_item)}>find me in:</div>
-        <a href="https://t.me/alexeev_andre" className={cn(styles.social_item)}>
+        <a href="https://t.me/alexeev_andre" target="_blank" title="Telegram Link" className={cn(styles.social_item)}>
           <RiTelegramFill />
         </a>
       </div>
       <a
         href="https://github.com/div4211111"
+        target="_blank"
+        title="Github Link"
         className={cn(styles.social_item, styles.social_item_right)}
       >
         <span>@div4211111</span>

@@ -66,6 +66,7 @@ export const ProjectsInfoComponent = ({
     } else {
       setProjects?.(initialProjects!);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [check]);
 
   return (

@@ -61,6 +61,7 @@ export const SnakeCanvas = ({
       setCanvasWidth(size.width);
       setCanvasHeight(size.height);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const clearCanvas = (ctx: CanvasRenderingContext2D) => {
     ctx.clearRect(-1, -1, canvasWidth + 2, canvasHeight + 2);
@@ -264,6 +265,7 @@ export const SnakeCanvas = ({
       drawApple(ctx);
       drawSnake(ctx);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [snake, velocity]);
 
   // Game Update Interval
