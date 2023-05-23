@@ -5,6 +5,7 @@ import { HeaderLink } from "@src/components";
 import { PathUrl } from "@src/config/pathUrl";
 import { useRouter } from "next/router";
 import { RiCloseFill, RiMenuFill } from "react-icons/ri";
+import { useTranslation } from "next-i18next";
 
 export const Header = ({
   className,
@@ -13,12 +14,14 @@ export const Header = ({
   ...props
 }: HeaderProps): JSX.Element => {
   const router = useRouter();
+  const { t } = useTranslation("layout");
   const firstPath = router.pathname.split("/")[1];
 
   return (
     <header className={cn(styles.header, className)} {...props}>
-      <div className={cn(styles.name)}>andrew-alexeev</div>
-      <button className={cn(styles.icon)}
+      <div className={cn(styles.name)}>{t("andrew alexeev")}</div>
+      <button
+        className={cn(styles.icon)}
         aria-label="open menu"
         title="open menu"
         aria-expanded={isOpen}
@@ -40,17 +43,17 @@ export const Header = ({
       <div className={cn(styles.links_container)}>
         <div className={cn(styles.links)}>
           <HeaderLink
-            text="_hello"
+            text={t("hello")}
             path={PathUrl.hello}
             active={firstPath === ""}
           />
           <HeaderLink
-            text="_about-me"
+            text={t("about me")}
             path={PathUrl.personalInfo}
             active={firstPath === "about"}
           />
           <HeaderLink
-            text="_projects"
+            text={t("projects")}
             path={PathUrl.projects}
             active={firstPath === "projects"}
             className={styles.border_right}
@@ -58,7 +61,7 @@ export const Header = ({
         </div>
         <div className={cn(styles.contacts)}>
           <HeaderLink
-            text="_contact-me"
+            text={t("contact me")}
             path={PathUrl.contacts}
             active={firstPath === "contacts"}
           />

@@ -1,0 +1,15 @@
+{
+  "meta title contacts": "Contacts",
+  "meta description contacts": "My contacts. Email me: alexeevandre@gmail.com",
+  "contacts path": "contacts",
+  "contacts form name": "_name",
+  "contacts form email": "_email",
+  "contacts form message": "_message",
+  "contacts button submit": "submit-message",
+  "contacts button send new": "send-new-message",
+  "contacts button sending": "Sending...",
+  "contacts thank you": "Thank you! 👍",
+  "contacts error": "Ooops. Error!",
+  "contacts success message": "Your message has been accepted. You will recieve answer really soon!",
+  "contacts error message": "Something went wrong!"
+}

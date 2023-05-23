@@ -7,6 +7,7 @@ import { ConctactsInfoData, IContactsData } from "@src/config/sideBarContent";
 import { RiMailLine } from "react-icons/ri";
 import { RiPhoneFill } from "react-icons/ri";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 export const ContactsInfoComponent = ({
   className,
@@ -15,6 +16,8 @@ export const ContactsInfoComponent = ({
   const router = useRouter();
   const firstPath = router.pathname.split("/")[1];
   const [active, setActive] = useState<boolean>(false);
+  const { t } = useTranslation("layout");
+
   const ItemElement = ({ name, path, type }: IContactsData): JSX.Element => {
     return (
       <a href={path} className={cn(styles.item)}>
@@ -35,7 +38,7 @@ export const ContactsInfoComponent = ({
   return (
     <div className={cn(styles.contacts, className)} {...props}>
       <SideBarFirstElement
-        name="contacts"
+        name={t("contacts sidebar")}
         active={active}
         setActive={setActive}
       >

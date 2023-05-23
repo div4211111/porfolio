@@ -1,3 +1,4 @@
+import { LanguagesType } from "@src/config/codeSnippetData";
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 export interface CodeSnippetProps
@@ -7,5 +8,5 @@ export interface CodeSnippetProps
   avatar: string;
   username: string;
   createdAt: string;
-  details: string;
+  details: Record<LanguagesType, string>;
 }

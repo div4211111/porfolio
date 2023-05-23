@@ -5,6 +5,7 @@ import { ProfessionalInfoData } from "@src/config/sideBarContent";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { ProfessionalInfoComponentProps } from "./ProfessionalInfoComponent.props";
+import { useTranslation } from "next-i18next";
 
 export const ProfessionalInfoComponent = ({
   className,
@@ -13,6 +14,7 @@ export const ProfessionalInfoComponent = ({
   const [active, setActive] = useState<boolean>(false);
   const router = useRouter();
   const secondPath = router.pathname.split("/")[2];
+  const { t } = useTranslation("layout");
 
   const getColor = (number: number): string => {
     if (number === 0) return "#E99287";
@@ -29,12 +31,13 @@ export const ProfessionalInfoComponent = ({
   return (
     <div className={cn(styles.professional_info, className)} {...props}>
       <SideBarFirstElement
-        name="professional-info"
+        name={t("name professional info")}
         active={active}
         setActive={setActive}
       >
         {Object.keys(ProfessionalInfoData).map((subject, index) => (
           <SideBarSecondElement
+            translatedName={t(`${subject} professional info`)}
             name={subject}
             items={ProfessionalInfoData[subject]}
             color={getColor(index)}

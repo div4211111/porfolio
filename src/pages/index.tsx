@@ -4,6 +4,9 @@ import { useState } from "react";
 import cn from "classnames";
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import { GetStaticProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const DynamicHomeSlider = dynamic(() =>
   import("../components").then((mod) => mod.HomeSlider)
@@ -13,6 +16,7 @@ const DynamicSnakeGame = dynamic(() =>
 );
 function Home() {
   const [skip, setSkip] = useState<boolean>(false);
+  const { t } = useTranslation("hello");
   return (
     <div
       className={cn(styles.wrapper, {
@@ -20,25 +24,22 @@ function Home() {
       })}
     >
       <Head>
-        <title>Home</title>
-        <meta
-          name="description"
-          content="Hi, I'm Andrew Alexeev, FrontEnd Developer. Let's get to know each other?"
-        />
+        <title>{t("meta title")}</title>
+        <meta name="description" content={t("meta description") as string} />
       </Head>
       <div className={styles.container}>
         <div className={styles.information}>
-          <div className={styles.uptitle}>Hi all. I am</div>
-          <div className={styles.title}>Andrew Alexeev</div>
-          <div className={styles.subtitle}>{"> Front-end developer"}</div>
+          <div className={styles.uptitle}>{t("hi all")}</div>
+          <div className={styles.title}>{t("name")}</div>
+          <div className={styles.subtitle}>{t("front-end developer")}</div>
           <div className={cn(styles.description, styles.description_desktop)}>
-            {"// complete the game to continue"}
+            {t("complete the game")}
           </div>
           <div className={cn(styles.description, styles.description_mobile)}>
-            {"// visit on my GitHub page"}
+            {t("visit on my GitHub page")}
           </div>
           <div className={cn(styles.description, styles.description_desktop)}>
-            {"// you can also see it on my Github page"}
+            {t("you can see")}
           </div>
           <div className={styles.link}>
             <span className={styles.const}>const</span>&nbsp;
@@ -69,5 +70,12 @@ function Home() {
     </div>
   );
 }
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, ["layout", "hello"])),
+    },
+  };
+};
 
 export default withLayout(Home);

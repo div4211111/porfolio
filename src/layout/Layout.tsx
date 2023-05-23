@@ -10,16 +10,14 @@ import cn from "classnames";
 import { HeaderLink } from "@src/components";
 import { PathUrl } from "@src/config/pathUrl";
 import { ErrorProps } from "next/error";
-import {
-  AppContext,
-  AppContextProvider,
-  IAppContext,
-} from "@src/context/app.context";
+import { AppContextProvider, IAppContext } from "@src/context/app.context";
+import { useTranslation } from "next-i18next";
 
 const Layout = ({ children }: LayoutProps): JSX.Element => {
   const router = useRouter();
   const firstPath = router.pathname.split("/")[1];
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { t } = useTranslation("layout");
   return (
     <div className={styles.wrapper}>
       <Header className={styles.header} isOpen={isOpen} setIsOpen={setIsOpen} />
@@ -46,7 +44,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
         >
           <div className={styles.links_item}>
             <HeaderLink
-              text="_hello"
+              text={t("hello")}
               path={PathUrl.hello}
               active={firstPath === ""}
             />
@@ -54,7 +52,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
           <div className={styles.links_item}>
             {" "}
             <HeaderLink
-              text="_about-me"
+              text={t("about me")}
               path={PathUrl.personalInfo}
               active={firstPath === "about"}
             />
@@ -62,7 +60,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
           <div className={styles.links_item}>
             {" "}
             <HeaderLink
-              text="_projects"
+              text={t("projects")}
               path={PathUrl.projects}
               active={firstPath === "projects"}
             />
@@ -70,7 +68,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
           <div className={styles.links_item}>
             {" "}
             <HeaderLink
-              text="_contact-me"
+              text={t("contact me")}
               path={PathUrl.contacts}
               active={firstPath === "contacts"}
             />
@@ -93,6 +91,8 @@ export const withLayout = <
       <AppContextProvider
         projects={null}
         initialProjects={null}
+        selectedProject={[]}
+        setSelectedProject={null}
         setInitialProjects={null}
         setProjects={null}
       >

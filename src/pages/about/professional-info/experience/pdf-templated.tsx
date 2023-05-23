@@ -1,22 +1,35 @@
 import { withAboutLayout } from "@src/aboutLayout/AboutLayout";
 import { AboutText } from "@src/components/AboutText/AboutText";
 import { withLayout } from "@src/layout/Layout";
-import { aboutMeContent } from "@src/config/aboutMeContent";
 import Head from "next/head";
+import { GetStaticProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 function PdfTemplated() {
+  const { t } = useTranslation("professional-info");
   return (
     <div>
       <Head>
-        <title>Pdf templated</title>
+        <title>{t("meta title pdf template")}</title>
         <meta
           name="description"
-          content="I worked as part of a team developing a corporate system for working with PDF documents."
+          content={t("meta description pdf template") as string}
         />
       </Head>
-      <AboutText text={aboutMeContent.professionalInfo.experience.pdfTemplated} />
+      <AboutText text={t("pdf template content professional info")} />
     </div>
   );
 }
 
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, [
+        "layout",
+        "professional-info",
+      ])),
+    },
+  };
+};
 export default withLayout(withAboutLayout(PdfTemplated));

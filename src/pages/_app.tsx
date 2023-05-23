@@ -4,8 +4,9 @@ import React from "react";
 import Head from "next/head";
 import "../styles/globals.scss";
 import NextNProgress from "nextjs-progressbar";
+import { appWithTranslation } from "next-i18next";
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return (
     <React.Fragment>
       <Head>
@@ -21,3 +22,4 @@ export default function App({ Component, pageProps }: AppProps) {
     </React.Fragment>
   );
 }
+export default appWithTranslation(App);

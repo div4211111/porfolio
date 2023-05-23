@@ -1,0 +1,15 @@
+{
+  "meta title contacts": "Контакты",
+  "meta description contact": "Мои контакты. Напишите мне: alexeevandre@gmail.com",
+  "contacts path": "контакты",
+  "contacts form name": "_имя",
+  "contacts form email": "_почта",
+  "contacts form message": "_сообщение",
+  "contacts button submit": "отправить",
+  "contacts button send new": "отправить еще",
+  "contacts button sending": "Отправка...",
+  "contacts thank you": "Спасибо! 👍",
+  "contacts error": "Ууупс. Ошибка",
+  "contacts success message": "Ваше сообщение принято. Вы получите ответ очень скоро!",
+  "contacts error message": "Что-то пошло не так!"
+}

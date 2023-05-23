@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { RiTerminalBoxFill } from "react-icons/ri";
 import { RiUser4Fill } from "react-icons/ri";
-import { RiGamepadFill } from "react-icons/ri";
 import { PathUrl } from "@src/config/pathUrl";
 import {
   ContactsInfoComponent,
@@ -46,9 +45,6 @@ export const Sidebar = ({ className, ...props }: SidebarProps): JSX.Element => {
 
       <div className={cn(styles.content_container)}>
         <div className={styles.content_subcontainer}>
-          <div className={cn(styles.content_mobile_title)}>
-            {"_" + firstPath}
-          </div>
           <div className={cn(styles.content, styles.content_mobile)}>
             {firstPath === "about" && <PersonalInfoComponent />}
             {firstPath === "about" && <ProfessionalInfoComponent />}

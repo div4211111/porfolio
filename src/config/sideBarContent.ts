@@ -31,11 +31,11 @@ export const PersonalInfoData: IInfoData = {
 export const ProfessionalInfoData: IInfoData = {
   experience: [
     {
-      name: "trello_analog",
+      name: "trello",
       path: "/about/professional-info/experience/trello",
     },
     {
-      name: "pdf_templated",
+      name: "pdf-templated",
       path: "/about/professional-info/experience/pdf-templated",
     },
   ],

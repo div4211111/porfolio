@@ -4,6 +4,7 @@ import { SnakeCanvasProps } from "./SnakeCanvas.props";
 import styles from "./SnakeCanvas.module.scss";
 import cn from "classnames";
 import { useSize } from "@src/hooks/useSize";
+import { useTranslation } from "next-i18next";
 
 type Apple = {
   x: number;
@@ -22,6 +23,7 @@ export const SnakeCanvas = ({
   initialCount,
   ...props
 }: SnakeCanvasProps): JSX.Element => {
+  const { t } = useTranslation("hello");
   // Canvas Settings
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -139,12 +141,12 @@ export const SnakeCanvas = ({
       velocity.dx === -1
         ? [10, 0, 0, 10]
         : velocity.dx === 1
-          ? [0, 10, 10, 0]
-          : velocity.dy === -1
-            ? [10, 10, 0, 0]
-            : velocity.dy === 1
-              ? [0, 0, 10, 10]
-              : [10]
+        ? [0, 10, 10, 0]
+        : velocity.dy === -1
+        ? [10, 10, 0, 0]
+        : velocity.dy === 1
+        ? [0, 0, 10, 10]
+        : [10]
     );
     ctx.fill();
     ctx.closePath();
@@ -350,13 +352,13 @@ export const SnakeCanvas = ({
         <button
           onClick={startGame}
           className={cn(styles.start_game)}
-          aria-label={"Start Snake Game"}
+          aria-label={t("aria start game") as string}
         >
           {isWinner || isLose
-            ? "play-again"
+            ? t("play again")
             : countDown === 4
-              ? "start-game"
-              : countDown}
+            ? t("start game")
+            : countDown}
         </button>
       )}
     </div>

@@ -6,11 +6,13 @@ import {
   useEffect,
   useState,
 } from "react";
-import { IProjectData } from "../config/projectsData";
+import { IProjectData, ProjectType } from "../config/projectsData";
 
 export interface IAppContext {
   initialProjects: IProjectData[] | null;
   setInitialProjects: Dispatch<SetStateAction<IProjectData[] | null>> | null;
+  selectedProject: ProjectType[];
+  setSelectedProject: Dispatch<SetStateAction<ProjectType[]>> | null;
   projects: IProjectData[] | null;
   setProjects: Dispatch<SetStateAction<IProjectData[] | null>> | null;
 }
@@ -18,6 +20,8 @@ export interface IAppContext {
 export const AppContext = createContext<IAppContext>({
   initialProjects: null,
   setInitialProjects: null,
+  selectedProject: [],
+  setSelectedProject: null,
   projects: null,
   setProjects: null,
 });
@@ -31,6 +35,10 @@ export const AppContextProvider = ({
   const [initialProjectsState, setInitialProjectsState] = useState<
     IProjectData[] | null
   >(null);
+
+  const [selectedProjectState, setSelectedProjectState] = useState<
+    ProjectType[]
+  >([]);
   useEffect(() => {
     setProjectsState(initialProjectsState);
   }, [initialProjectsState]);
@@ -40,6 +48,8 @@ export const AppContextProvider = ({
       value={{
         initialProjects: initialProjectsState,
         setInitialProjects: setInitialProjectsState,
+        selectedProject: selectedProjectState,
+        setSelectedProject: setSelectedProjectState,
         projects: projectsState,
         setProjects: setProjectsState,
       }}

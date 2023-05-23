@@ -10,6 +10,7 @@ import {
 import Image from "next/image";
 import { SnakeCanvas } from "../SnakeCanvas/SnakeCanvas";
 import { useState } from "react";
+import { useTranslation } from "next-i18next";
 
 export const SnakeGame = ({
   className,
@@ -18,6 +19,7 @@ export const SnakeGame = ({
 }: SnakeGameProps): JSX.Element => {
   const initialFoodCount: number = 10;
   const [foodCount, setFoodCount] = useState<number>(10);
+  const { t } = useTranslation("hello");
   return (
     <div className={cn(styles.container, className)} {...props}>
       <div className={cn(styles.bolts)}>
@@ -40,8 +42,8 @@ export const SnakeGame = ({
         </div>
         <div className={cn(styles.information)}>
           <div className={cn(styles.information_block)}>
-            <div className={cn(styles.text)}>{"//use keyboard"}</div>
-            <div className={cn(styles.text)}>{"//arrows to play"}</div>
+            <div className={cn(styles.text)}>{t("use keyboard")}</div>
+            <div className={cn(styles.text)}>{t("arrows")}</div>
             <div className={cn(styles.arrow_items)}>
               <div className={cn(styles.arrow_item)}>
                 <RxTriangleUp />
@@ -59,7 +61,7 @@ export const SnakeGame = ({
               </div>
             </div>
           </div>
-          <div className={cn(styles.text)}>{"//food left"}</div>
+          <div className={cn(styles.text)}>{t("food left")}</div>
           <div className={cn(styles.apples)}>
             {Array.from(
               { length: initialFoodCount },
@@ -73,9 +75,12 @@ export const SnakeGame = ({
               ></div>
             ))}
           </div>
-          <button onClick={() => setSkip(true)} className={cn(styles.button)} aria-label={"Skip Snake Game"}
+          <button
+            onClick={() => setSkip(true)}
+            className={cn(styles.button)}
+            aria-label={t("aria skip") as string}
           >
-            skip
+            {t("skip")}
           </button>
         </div>
       </div>

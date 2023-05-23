@@ -5,12 +5,14 @@ import { RiCloseFill } from "react-icons/ri";
 import { useRouter } from "next/router";
 import { codeSnippetDate } from "@src/config/codeSnippetData";
 import { CodeSnippet } from "@src/components";
+import { useTranslation } from "next-i18next";
 
 const AboutLayout = ({ children }: AboutLayoutProps): JSX.Element => {
   const router = useRouter();
-  const pathFour = router.pathname.split("/")[4];
-  const pathThree = router.pathname.split("/")[3];
+  const { t } = useTranslation("layout");
   const pathTwo = router.pathname.split("/")[2];
+  const pathThree = router.pathname.split("/")[3];
+  const pathFour = router.pathname.split("/")[4];
 
   return (
     <div className={styles.wrapper}>
@@ -18,11 +20,14 @@ const AboutLayout = ({ children }: AboutLayoutProps): JSX.Element => {
         <div className={styles.wrapper_header_left}>
           <div className={styles.wrapper_header_title}>
             <span className={styles.header_desktop}>
-              {pathFour === undefined ? pathTwo : pathFour}
+              {pathFour === undefined
+                ? t(`${pathTwo} path`)
+                : t(`${pathFour} path`)}
             </span>
             <span className={styles.header_mobile}>
-              {pathThree && pathFour && `// ${pathThree} / ${pathFour}`}
-              {pathFour === undefined ? pathTwo : pathFour}
+              {pathThree &&
+                pathFour &&
+                `// ${t(`${pathThree} path`)} / ${t(`${pathFour} path`)}`}
             </span>
 
             {pathFour && (
@@ -31,13 +36,10 @@ const AboutLayout = ({ children }: AboutLayoutProps): JSX.Element => {
                 onClick={() =>
                   router.push(router.pathname.split("/").slice(0, -2).join("/"))
                 }
-                aria-label="go to folder"
-                title="go to folder"
+                aria-label={t("aria go to folder") as string}
+                title={t("aria go to folder") as string}
               >
-
-                <RiCloseFill
-                  className={styles.wrapper_header_title_svg}
-                />
+                <RiCloseFill className={styles.wrapper_header_title_svg} />
               </button>
             )}
           </div>
@@ -51,9 +53,7 @@ const AboutLayout = ({ children }: AboutLayoutProps): JSX.Element => {
 
         <div className={styles.code_snippet}>
           <div className={styles.code_snippet_content}>
-            <div className={styles.code_snippet_title}>
-              {"// Code snippet showcase:"}
-            </div>
+            <div className={styles.code_snippet_title}>{t("show snippet")}</div>
             {codeSnippetDate.map((snip) => (
               <CodeSnippet {...snip} key={snip.code} />
             ))}

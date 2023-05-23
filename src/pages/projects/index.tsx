@@ -4,15 +4,19 @@ import { AppContext } from "@src/context/app.context";
 import { withLayout } from "@src/layout/Layout";
 import styles from "@src/styles/Projects.module.scss";
 import { GetStaticProps } from "next";
-import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import cn from "classnames";
 import Head from "next/head";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 function Projects({ projects }: ProjectsProps) {
-  const { setInitialProjects, projects: projectsState } =
-    useContext(AppContext);
-  const router = useRouter();
+  const {
+    setInitialProjects,
+    projects: projectsState,
+    selectedProject,
+  } = useContext(AppContext);
+  const { t } = useTranslation("projects");
   useEffect(() => {
     setInitialProjects?.(projects);
   }, [projects, setInitialProjects]);
@@ -20,16 +24,18 @@ function Projects({ projects }: ProjectsProps) {
   return (
     <div className={styles.wrapper}>
       <Head>
-        <title>Projects</title>
+        <title>{t("meta title projects")}</title>
         <meta
           name="description"
-          content="My projects, different technologies, same result"
+          content={t("meta description projects") as string}
         />
       </Head>
       <div className={styles.wrapper_header}>
         <div className={styles.wrapper_header_title}>
-          <span>{"// projects / "}</span>
-          {router.query.type ? router.query.type : "_all"}
+          <span>{t("title projects")}</span>
+          {selectedProject.length > 0
+            ? selectedProject.join("; ")
+            : t("title projects all")}
         </div>
       </div>
       <div className={styles.container}>
@@ -52,12 +58,16 @@ function Projects({ projects }: ProjectsProps) {
 
 export default withLayout(Projects);
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const projects = projectData;
 
   return {
     props: {
       projects,
+      ...(await serverSideTranslations(locale as string, [
+        "layout",
+        "projects",
+      ])),
     },
   };
 };

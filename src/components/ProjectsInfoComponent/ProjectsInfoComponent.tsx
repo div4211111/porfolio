@@ -8,12 +8,15 @@ import { ProjectType, projectTypes } from "@src/config/projectsData";
 import { ProjectBadge } from "../ProjectBadge/ProjectBadge";
 import { RiCheckFill } from "react-icons/ri";
 import { AppContext } from "@src/context/app.context";
+import { useTranslation } from "next-i18next";
 
 export const ProjectsInfoComponent = ({
   className,
   ...props
 }: ProjectsInfoComponentProps): JSX.Element => {
-  const { initialProjects, setProjects } = useContext(AppContext);
+  const { initialProjects, setProjects, setSelectedProject } =
+    useContext(AppContext);
+  const { t } = useTranslation("layout");
   const [active, setActive] = useState<boolean>(false);
   const [check, setCheck] = useState(
     Object.fromEntries(Object.keys(projectTypes).map((key) => [key, false]))
@@ -63,8 +66,10 @@ export const ProjectsInfoComponent = ({
       if (result) {
         setProjects?.(result);
       }
+      setSelectedProject?.(checkedValue as ProjectType[]);
     } else {
       setProjects?.(initialProjects!);
+      setSelectedProject?.([]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [check]);
@@ -72,7 +77,7 @@ export const ProjectsInfoComponent = ({
   return (
     <div className={cn(styles.container, className)} {...props}>
       <SideBarFirstElement
-        name="projects"
+        name={t("name projects")}
         active={active}
         setActive={setActive}
       >

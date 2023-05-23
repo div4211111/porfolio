@@ -6,6 +6,9 @@ import Image from "next/image";
 import { useState } from "react";
 import { RiCloseFill } from "react-icons/ri";
 import { Code } from "../Code/Code";
+import { useRouter } from "next/router";
+import { LanguagesType } from "@src/config/codeSnippetData";
+import { useTranslation } from "next-i18next";
 
 export const CodeSnippet = ({
   type,
@@ -17,6 +20,8 @@ export const CodeSnippet = ({
   details,
   ...props
 }: CodeSnippetProps): JSX.Element => {
+  const { locale } = useRouter();
+  const { t } = useTranslation("layout");
   const [isOpenedDetails, setIsOpenedDetails] = useState(false);
   return (
     <div className={cn(styles.container, className)} {...props}>
@@ -39,11 +44,11 @@ export const CodeSnippet = ({
           <button
             className={cn(styles.detail_button)}
             onClick={() => setIsOpenedDetails(true)}
-            aria-label="open details"
-            title="open details"
+            aria-label={t("aria details open") as string}
+            title={t("aria details open") as string}
           >
             <RiChatSmile3Line />
-            details
+            {t("details")}
           </button>
         </div>
       </div>
@@ -53,12 +58,14 @@ export const CodeSnippet = ({
           [styles.container_details_active]: isOpenedDetails,
         })}
       >
-        <div className={cn(styles.details_text)}>{details}</div>
+        <div className={cn(styles.details_text)}>
+          {details[locale as LanguagesType]}
+        </div>
         <button
           className={cn(styles.details_icon)}
           onClick={() => setIsOpenedDetails(false)}
-          aria-label="close details"
-          title="close details"
+          aria-label={t("aria details close") as string}
+          title={t("aria details close") as string}
           aria-expanded={isOpenedDetails}
         >
           <RiCloseFill />

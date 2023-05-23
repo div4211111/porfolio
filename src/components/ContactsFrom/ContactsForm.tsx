@@ -6,6 +6,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Textarea } from "../Textarea/Textarea";
 import { FormType } from "@src/types/formTypes";
+import { useTranslation } from "next-i18next";
 
 export const ContactsForm = ({
   form,
@@ -14,6 +15,7 @@ export const ContactsForm = ({
   ...props
 }: ContactsFormProps): JSX.Element => {
   const [type, setType] = useState<FormType>(FormType.default);
+  const { t } = useTranslation("contacts");
   const changeHandler = (
     event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
@@ -52,19 +54,25 @@ export const ContactsForm = ({
         {...props}
       >
         <div className={styles.content_item}>
-          <div className={styles.content_item_label}>_name:</div>
+          <div className={styles.content_item_label}>
+            {t("contacts form name")}
+          </div>
           <div className={styles.content_item_input}>
             <Input value={form.name} setValue={changeHandler} name="name" />
           </div>
         </div>
         <div className={styles.content_item}>
-          <div className={styles.content_item_label}>_email:</div>
+          <div className={styles.content_item_label}>
+            {t("contacts form email")}
+          </div>
           <div className={styles.content_item_input}>
             <Input value={form.email} setValue={changeHandler} name="email" />
           </div>
         </div>
         <div className={styles.content_item}>
-          <div className={styles.content_item_label}>_message:</div>
+          <div className={styles.content_item_label}>
+            {t("contacts form message")}
+          </div>
           <div className={styles.content_item_input}>
             <Textarea
               value={form.message}
@@ -76,10 +84,12 @@ export const ContactsForm = ({
         <button
           type="submit"
           className={styles.content_button}
-          aria-label="submit-message"
+          aria-label={t("contacts button submit") as string}
           aria-expanded={type !== FormType.default && type !== FormType.loading}
         >
-          {type === FormType.loading ? "Sending..." : "submit-message"}
+          {type === FormType.loading
+            ? t("contacts button sending")
+            : t("contacts button submit")}
         </button>
       </form>
     );
@@ -87,21 +97,23 @@ export const ContactsForm = ({
     return (
       <div className={styles.response_message}>
         <div className={styles.response_message_title}>
-          {type === FormType.success ? "Thank you! 👍" : "Ooops. Error!"}
+          {type === FormType.success
+            ? t("contacts thank you")
+            : t("contacts error")}
         </div>
         <div className={styles.response_message_text}>
           {type === FormType.success
-            ? "Your message has been accepted. You will recieve answer really soon!"
-            : "Something went wrong!"}
+            ? t("contacts success message")
+            : t("contacts error message")}
         </div>
         <div className={styles.response_message_button}>
           <button
             className={styles.content_button}
             onClick={() => setType(FormType.default)}
-            aria-label="send-new-message"
+            aria-label={t("contacts button send new ") as string}
             aria-expanded={type !== FormType.success && type !== FormType.error}
           >
-            send-new-message
+            {t("contacts button send new")}
           </button>
         </div>
       </div>

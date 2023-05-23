@@ -1,22 +1,36 @@
 import { withAboutLayout } from "@src/aboutLayout/AboutLayout";
 import { AboutText } from "@src/components/AboutText/AboutText";
 import { withLayout } from "@src/layout/Layout";
-import { aboutMeContent } from "@src/config/aboutMeContent";
 import Head from "next/head";
+import { GetStaticProps } from "next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 function University() {
+  const { t } = useTranslation("personal-info");
   return (
     <div>
       <Head>
-        <title>University</title>
+        <title>{t("university meta title")}</title>
         <meta
           name="description"
-          content="Currently, I am pursuing higher education in the field of web development, and I couldn't be more excited about it."
+          content={t("university meta description") as string}
         />
       </Head>
-      <AboutText text={aboutMeContent.personalInfo.education.university} />
+      <AboutText text={t("university content personal info")} />
     </div>
   );
 }
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, [
+        "layout",
+        "personal-info",
+      ])),
+    },
+  };
+};
 
 export default withLayout(withAboutLayout(University));

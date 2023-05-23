@@ -9,6 +9,9 @@ import ts from "react-syntax-highlighter/dist/cjs/languages/prism/typescript";
 import js from "react-syntax-highlighter/dist/cjs/languages/prism/javascript";
 import { IContactsForm } from "@src/types/contactFrom.interface";
 import Head from "next/head";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetStaticProps } from "next";
+import { useTranslation } from "next-i18next";
 
 SyntaxHighlighter.registerLanguage("typescript", ts);
 SyntaxHighlighter.registerLanguage("javascript", js);
@@ -20,6 +23,7 @@ function Contacts() {
     message: "",
   });
   const [style, setStyle] = useState({});
+  const { t } = useTranslation("contacts");
 
   const customStyle = {
     'code[class*="language-"]': {
@@ -38,17 +42,17 @@ function Contacts() {
   return (
     <div className={styles.wrapper}>
       <Head>
-        <title>Contacts</title>
+        <title>{t("meta title contacts")}</title>
         <meta
           name="description"
-          content="My contacts. Email me: alexeevandre@gmail.com"
+          content={t("meta description contacts") as string}
         />
       </Head>
       <div className={styles.wrapper_header}>
         <div className={styles.wrapper_header_left}>
           <div className={styles.wrapper_header_title}>
             <span>{"// "}</span>
-            {pathFirst}
+            {t(pathFirst + " path")}
           </div>
         </div>
         <div></div>
@@ -76,5 +80,16 @@ function Contacts() {
     </div>
   );
 }
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, [
+        "layout",
+        "contacts",
+      ])),
+    },
+  };
+};
 
 export default withLayout(Contacts);

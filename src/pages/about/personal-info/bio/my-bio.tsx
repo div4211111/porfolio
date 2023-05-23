@@ -1,28 +1,37 @@
 import { AboutText } from "@src/components/AboutText/AboutText";
 import styles from "./my-bio.module.scss";
-import { aboutMeContent } from "@src/config/aboutMeContent";
 import { withLayout } from "@src/layout/Layout";
 import { withAboutLayout } from "@src/aboutLayout/AboutLayout";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import Head from "next/head";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const lines = aboutMeContent.personalInfo.bio.myBio;
-  return { props: { lines } };
-};
 function MyBio() {
+  const { t } = useTranslation("personal-info");
   return (
     <div className={styles.wrapper}>
       <Head>
-        <title>Biography</title>
+        <title>{t("my bio meta title")}</title>
         <meta
           name="description"
-          content="Hi, I'm Andrew Alexeev! I'm a frontend developer with a real passion for technology. Over the years, I've gained an in-depth understanding of various programming languages, frameworks, and development tools, which has allowed me to deliver high-quality solutions to my clients."
+          content={t("my bio meta description") as string}
         />
       </Head>
-      <AboutText text={aboutMeContent.personalInfo.bio.myBio} />
+      <AboutText text={t("my bio content personal info")} />
     </div>
   );
 }
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, [
+        "layout",
+        "personal-info",
+      ])),
+    },
+  };
+};
 
 export default withLayout(withAboutLayout(MyBio));
